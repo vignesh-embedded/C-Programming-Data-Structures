@@ -1,0 +1,178 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node                 // node structure
+{
+    struct node *prev;      // prev part
+    int data;               // data part
+    struct node *next;      // next part
+}*head, *old, *p, *n;
+
+void display_forward();     // display_forward function declartion
+void display_reverse();     // display_reverse function declartion
+
+void main()                 
+{
+    int i, num;             
+    printf("Enter the Number of Nodes:\n");
+    scanf("%d",&num);
+
+    head = (struct node*) malloc(sizeof(struct node));  // creates head node
+    printf("Enter the Data for Head Node:\n");          // enter data 10
+    scanf("%d",&head->data);                            // store data in head's data part
+    head->next = NULL;                                  // make head next paRt as NULL
+    head->prev = NULL;                                  // make head prev paRt as NULL
+    old = head;                                         // keep track of the last node
+    
+    for(i=1;i<num;i++)                                 // for loop to create next nodes
+    {
+        n = (struct node*) malloc(sizeof(struct node)); // allocate size of node n
+        printf("Enter Data for Other Nodes:\n");        // ask data from user
+        scanf("%d",&n->data);                           // store the data in node n of data part
+        n->next = NULL;                                 // make the node n next part as NULL
+        n->prev = NULL;                                 // make the node n prev part also as NULL
+        old->next = n;                                  // link between last node and new node
+        n->prev = old;                                  // link between new node and last node
+        old = n;                                        // makes old to point to the new node
+    }
+    printf("Doubly Listed List Before\n");
+    display_forward();                                  // calls display function
+
+
+/*  
+    // Insert 60 at begin
+    n = (struct node*)malloc(sizeof(struct node));      // create new node n
+    n->data = 60;                                       // assign 60 to n's data part
+    n->next = NULL;                                     // make n's next part NULL
+    n->prev = NULL;                                     // make n's prev part NULL
+    n->next = head;                                     // point n's next to current head
+    head->prev = n;                                     // point current head's prev to n
+    head = n;                                           // make n the new head
+    
+    printf("\n");
+    printf("Doubly Linked List After Inserting 60 At Beginning: \n");
+    display_forward();                                  // calls display function
+*/
+
+/*
+    // Insert 60 in middle pos 4
+    n = (struct node*)malloc(sizeof(struct node));      // create new node
+    printf("Enter the Data to insert:\n");              // enter data 60
+    scanf("%d",&n->data);                               // store data 60
+    n->next = NULL;                                     // make n's next NULL
+    n->prev = NULL;                                     // make n's prev NULL
+    printf("Enter the Postion:\n");                     // enter position 4
+    scanf("%d",&num);                                   // store position in num
+    p = head;                                           // start from head
+    for(i=0; i<(num-2); i++)                            // go to node before insertion point
+    {
+        p = p->next;                                    // move to next node
+    }
+    n->next = p->next;                                  // link new node to next node
+    n->prev = p;                                        // link new node to previous node
+    p->next->prev = n;                                  // link next node's prev to new node
+    p->next = n;                                        // link previous node to new node
+    
+    printf("\n");
+    printf("Doubly Linked List After Inserting At Middle: \n");
+    display_forward();
+*/
+
+/*
+    // Insert 80 at end
+    n = (struct node*)malloc(sizeof(struct node));      // create new node n
+    n->data = 80;                                       // assign 80 to n's data part
+    n->next = NULL;                                     // make n's next part NULL
+    n->prev = NULL;                                     // make n's prev part NULL
+    old = head;                                         // start from head
+    while(old->next != NULL)                            // traverse to last node
+    {
+        old = old->next;                                // move to next node
+    }
+    old->next = n;                                      // link last node to new node
+    n->prev = old;                                      // link new node's prev to last node
+    
+    printf("\n");
+    printf("Doubly Linked List After Inserting 80 At End: \n");
+    display_forward();
+*/
+
+/*
+    // Delete at beginning
+    p = head;                                           // store head node
+    head = head->next;                                  // move head to next node
+    free(p);                                            // free old head
+    
+    printf("\n");
+    printf("Doubly Linked List After Deleting At Beginning: \n");
+    display_forward();                                  // calls display function
+*/
+
+/*
+    // Delete at end
+    p = head;                                           // start from head
+    while(p->next != NULL)                              // go to last node
+    {
+        p = p->next;                                    // move to next node
+    }
+    p->prev->next = NULL;                               // set second-last node's next to NULL
+    free(p);                                            // free last node
+    
+    printf("\n");
+    printf("Doubly Linked List After Deleting At End: \n");
+    display_forward();                                  // calls display function
+*/
+/*
+    // Delete at 3rd position
+    printf("Enter the Node Postion to Delete: \n");     // enter position
+    scanf("%d",&num);                                   // store position in num
+    p = head;                                           // start from head
+    for(i=1; i<num; i++)                                // go to node before deletion point
+    {
+        old = p;                                        // keep track of previous node
+        p = p->next;                                    // move to next node
+    }
+    old->next = p->next;                                // link previous node to next node
+    p->next->prev = old;                                // link next node's prev to previous node
+    free(p);                                            // free the node to delete
+    
+    printf("\n");
+    printf("Doubly Linked List After Deleting At 3rd Position: \n");
+    display_forward();                                  // calls display function
+*/
+/*
+    printf("Doubly Linked List Forward Traverse: \n");
+    display_forward();                                          // calls display function
+    printf("Doubly Linked List Reverse Traverse: \n");
+    display_reverse();                                          // calls display function
+*/
+
+}
+
+void display_forward()                                  // display forward function definition
+{
+    p = head;                                           // start from head node
+    while(p != NULL)                                    // loop until last node
+    {
+        printf("%d ",p->data);                          // print current node's data
+        p = p->next;                                    // move to next node
+    }
+    printf("\n");
+}
+
+/*
+
+void display_reverse()                                   // display Reverse function definition
+{
+    p = head;                                            // start from head node
+    while(p->next != NULL)                               // loop until last node
+    {
+        p = p->next;                                     // move to next node
+    }
+    while(p != NULL)
+    {
+        printf("%d ",p->data); 
+        p = p->prev;
+    }
+}
+*/

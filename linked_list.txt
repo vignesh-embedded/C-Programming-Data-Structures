@@ -1,0 +1,138 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node                 // node structure
+{
+    int data;               // data part
+    struct node *next;      // next part
+}*head, *old, *p, *n;
+
+void display();             // display function declartion
+
+void main()                 
+{
+    int i, num;             
+    printf("Enter the Number of Nodes:\n");
+    scanf("%d",&num);
+
+    head = (struct node*) malloc(sizeof(struct node));  // creates head node
+    printf("Enter the Data for Head Node:\n");          // enter data 10
+    scanf("%d",&head->data);                            // store data in head's data part
+    head->next = NULL;                                  // make head next paRt as NULL
+    old = head;                                         // keep track of the last node
+    
+    for(i=1;i<num;i++)                                 // for loop to create next nodes
+    {
+        n = (struct node*) malloc(sizeof(struct node)); // allocate size of node n
+        printf("Enter Data for Other Nodes:\n");        // ask data from user
+        scanf("%d",&n->data);                           // store the data in node n of data part
+        n->next = NULL;                                 // make the node n next part as NULL
+        old->next = n;                                  // link between last node and new node
+        old = n;                                        // makes old to point to the new node
+    }
+    
+    printf("Linked List Before\n");
+    display();                                          // calls display function
+
+ /*    
+    // Insert 60 at beginning
+    n = (struct node*)malloc(sizeof(struct node));      // create new node n
+    n->data = 60;                                       // assign 60 to n's data part
+    n->next = NULL;                                     // make n's next part NULL
+    n->next = head;                                     // point n's next to current head
+    head = n;                                           // make n the new head
+    printf("\n");
+    printf("Linked List After Inserting 60 At beginning\n");  
+    display();                                          // calls display function
+*/
+/*
+    // Insert 60 at pos 4
+    n = (struct node*)malloc(sizeof(struct node));      // create new node
+    printf("Enter the Data to insert:\n");              // enter data example 60
+    scanf("%d",&n->data);                               // store data 60
+    n->next = NULL;                                     // make n's next NULL
+    printf("Enter the Postion:\n");                     // enter position example 4
+    scanf("%d",&num);                                   // store position in num
+    p = head;                                           // start from head
+    for(i=0; i<(num-2); i++)                            // go to node before insertion point
+    {
+        p = p->next;                                    // move to next node
+    }
+    n->next = p->next;                                  // link new node to next node
+    p->next = n;                                        // link previous node to new node
+    printf("Linked List After Inserting 60 at Pos 4:\n");
+    display();                                          // calls display function
+*/
+
+/*  
+    // Insert 80 at end
+    n = (struct node*)malloc(sizeof(struct node));      // create new node n to insert 80 at end
+    n->data = 80;                                       // assign 80 to n's data part
+    n->next = NULL;                                     // make n's next part NULL
+    old = head;                                         // start from head
+    while (old->next != NULL)                           // traverse to last node
+    {
+        old = old->next;                                // move to next node
+    }
+    old->next = n;                                      // link last node to new node
+    
+    printf("\n");
+    printf("Linked List After Inserting 80 At End\n"); 
+    display();                                          // calls display function
+*/
+
+/*
+    // Delete at begin
+    p = head;                                           // store head node
+    head = head->next;                                  // move head to next node
+    free(p);                                            // free old head
+    
+    printf("\n");
+    printf("Linked List After Delete A Node at Beginning\n");
+    display();                                          // calls display function
+*/
+
+/*
+    // Delete at 3rd position
+    printf("Enter the Node Postion to Delete: \n");        // enter position 3
+    scanf("%d",&num);                                   // store position in num
+    p=head;                                             // start from head
+    for(i=1;i<num;i++)                                  // go to node before deletion point
+    {
+        old = p;                                        // keep track of previous node
+        p=p->next;                                      // move to next node
+    }
+    old->next = p->next;                                // link previous node to next node
+    free(p);                                            // free the node for delete
+    
+    printf("\n");
+    printf("Linked List After Deleting At 3rd Position\n");
+    display();
+*/
+
+/*
+    // Delete at end
+    p = head;                                       // start from head
+    while(p->next->next != NULL)                    // go to second-last node
+        {
+            p = p->next;                            // move to next node
+        }
+    free(p->next);                                  // free last node
+    p->next = NULL;                                 // set new last node's next to NULL
+    
+    printf("\n");
+    printf("Linked List After Deleting At End\n");
+    display();
+*/
+
+}
+void display()                                          // display function definition
+{
+    p = head;                                           // start from head node
+    while(p != NULL)                                    // loop until last node
+    {
+        printf("%d ",p->data);                          // print current node's data
+        p = p->next;                                    // move to next node
+    }
+    printf("\n");
+}
