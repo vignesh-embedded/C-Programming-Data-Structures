@@ -1,0 +1,127 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    struct node *prev;
+    int data;
+    struct node *next;
+}*head,*old,*p,*n;
+
+void display();
+void reverse_display();
+
+void main()
+{
+    int i,k;
+    printf("enter the no of node\n");
+    scanf("%d",&k);
+    head = (struct node*)malloc(sizeof(struct node));
+    printf("enter data\n");
+    scanf("%d",&head->data);
+    head->next = head;
+    head->prev = head;
+    old = head;
+    for(i=1;i<k;i++)
+    {
+        n = (struct node*)malloc(sizeof(struct node));
+        printf("enter data\n");
+        scanf("%d",&n->data);
+        n->next = head;
+        n->prev = old;
+        old->next = n;
+        head->prev = n;
+        old = n;
+    }
+    
+/*
+    printf("display data\n");
+    display();
+    printf("display data\n");
+    reverse_display();
+*/
+/*
+    // Insertion at beginning
+    n = (struct node*)malloc(sizeof(struct node));
+    printf("enter data to insert at beginning\n");
+    scanf("%d",&n->data);
+    n->next = head;
+    n->prev = head->prev;
+    head->prev->next = n;
+    head->prev = n;
+    head = n;
+    printf("after insertion at beginning\n");
+    display();
+    printf("after insertion at beginning from reverse\n");
+    reverse_display();
+
+*/
+/*
+    // Insertion at end
+    n = (struct node*)malloc(sizeof(struct node));
+    printf("enter data to insert at end\n");
+    scanf("%d",&n->data);
+    n->next = head;
+    n->prev = head->prev;
+    head->prev->next = n;
+    head->prev = n;
+    printf("after insertion at end\n");
+    display();
+    printf("after insertion at end from reverse\n");
+    reverse_display();
+*/
+
+/*
+    // Deletion at beginning
+    if(head != NULL)
+    {
+        p = head;
+        head->prev->next = head->next;
+        head->next->prev = head->prev;
+        head = head->next;
+        free(p);
+    }
+    printf("after deletion at beginning\n");
+    display();
+    printf("after deletion at beginning from reverse\n");
+    reverse_display();
+*/
+
+/*
+    // Deletion at end
+    if(head != NULL)
+    {
+        p = head->prev;
+        p->prev->next = head;
+        head->prev = p->prev;
+        free(p);
+    }
+    printf("after deletion at end\n");
+    display();
+    printf("after deletion at end from reverse\n");
+    reverse_display();
+    
+*/
+}
+
+void display()
+{
+    p = head;
+    do
+    {
+        printf("%d\n",p->data);
+        p = p->next;
+    }
+    while(p != head);
+}
+
+void reverse_display()
+{
+    p = head->prev;
+    do
+    {
+        printf("%d\n",p->data);
+        p = p->prev;
+    }
+    while(p != head->prev);
+}

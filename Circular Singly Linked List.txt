@@ -1,0 +1,123 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+}*head,*old,*p,*n;
+
+void display();
+
+void main()
+{
+    int i,j,k;
+    printf("Enter the no of nodes: \n");
+    scanf("%d",&k);
+    head = (struct node*)malloc(sizeof(struct node));
+    printf("Enter the data:\n");
+    scanf("%d",&head->data);
+    head->next=head;
+    old=head;
+    for(i=1;i<k;i++)
+    {
+        n= (struct node*)malloc(sizeof(struct node));
+        printf("Enter the data:\n");
+        scanf("%d",&n->data);
+        n->next = head;
+        old->next = n;
+        old = n;
+    }
+    printf("Display data\n");
+    display();
+    
+    
+/* 
+    // insertion at beginning 
+    n= (struct node*)malloc(sizeof(struct node));
+    printf("enter the data\n");
+    scanf("%d",&n->data);
+    n->next=head;    
+
+    p=head;
+    while(p->next !=head)
+    {
+        p=p->next;
+    }
+    p->next=n;
+    head=n;
+    printf("After insertion at beginning\n");
+    display();
+*/
+
+/*
+    // insertion at end
+    n = (struct node*)malloc(sizeof(struct node));
+    printf("Enter the data:\n");
+    scanf("%d",&n->data);
+    p = head;
+    while(p->next != head)
+    {
+        p = p->next;
+    }
+    p->next = n;
+    n->next = head;
+    
+    printf("After insertion at end\n");
+    display();
+*/
+
+
+/*    
+    // deletion at beginning
+    if(head != NULL)
+    {
+        p = head;
+        while(p->next != head)
+        {
+            p = p->next;
+        }
+        p->next = head->next;
+        n = head;
+        head = head->next;
+        free(n);
+    }
+    printf("After deletion at beginning\n");
+    display();
+    
+*/
+
+/*  
+    // deletion at end 
+    p=head;
+    while(p->next != head)
+    {
+        old=p;
+        p=p->next;
+    }
+    old->next = head;
+    free(p);
+    
+    printf("After deletion of Node at End\n");
+    display();
+    
+*/
+
+}
+
+void display()
+{
+    p=head;
+    do
+    {
+        printf("%d->",p->data);
+        p=p->next;
+    }
+    while(p!=head);
+    printf("\n");
+}
+        
+        
+        
+        
+        

@@ -1,0 +1,94 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+
+struct node
+{
+    int data;
+    struct node* next;
+}*top=NULL,*p,*n;
+
+void push();
+void pop();
+void display();
+int isfull();
+int isempty();
+
+void main()
+{
+    int num;
+    while(1)
+    {
+        printf("chose what operation 1=>push 2=> pop 3=>display\n");
+        scanf("%d",&num);
+        switch(num)
+        {
+            case 1:
+                push();
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                display();
+                break;
+        }
+    }
+}
+
+void push()
+{
+    if (top == NULL)
+    {
+        n= (struct node*)malloc(sizeof(struct node));
+        printf("enter the value \n");
+        scanf("%d",&n->data);
+        n->next=NULL;
+        top=n;
+    }
+    else
+    {
+        n= (struct node*)malloc(sizeof(struct node));
+        printf("enter the value \n");
+        scanf("%d",&n->data);
+        n->next=top;
+        top =n; 
+    }
+}
+
+
+void pop()
+{
+    if(isempty())
+    {
+        printf("stack empty not possible pop operation \n");
+    }
+    else
+    {
+        n=top;
+        top=top->next;
+        free(n);
+    }
+}
+
+void display()
+{
+    p=top;
+    while(p != NULL)
+    {
+        printf("%d",p->data);
+        p=p->next;
+    }
+}
+
+int isempty()
+{
+    if(top == NULL)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
